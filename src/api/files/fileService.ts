@@ -61,9 +61,6 @@ export const fileService = {
       let currentDirectory: IDirectoryChildren[] | undefined = directoryTree;
 
       pathSegments.forEach((segment: string, index: number) => {
-        if (segment == "ADV-H5-New") {
-          console.log("im herere");
-        }
         const isFile: boolean =
           pathSegments.length != 1 &&
           index === pathSegments.length - 1 &&
