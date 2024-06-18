@@ -6,6 +6,7 @@ import {
   ServiceResponse,
 } from "@/common/models/serviceResponse";
 import { logger } from "@/server";
+import { P } from "pino";
 
 export const fileService = {
   retrieveAndMapResults: async (): Promise<
@@ -54,12 +55,15 @@ export const fileService = {
     paths.forEach((path: IPath) => {
       const pathSegments = path["fileUrl"]
         .split("/")
-        .splice(3, 3)
+        .splice(3)
         .filter((el: string) => el);
 
       let currentDirectory: IDirectoryChildren[] | undefined = directoryTree;
 
       pathSegments.forEach((segment: string, index: number) => {
+        if (segment == "ADV-H5-New") {
+          console.log("im herere");
+        }
         const isFile: boolean =
           pathSegments.length != 1 &&
           index === pathSegments.length - 1 &&
