@@ -7,10 +7,7 @@ import {
 } from "@/common/models/serviceResponse";
 import { logger } from "@/server";
 
-type NewPath = string | IDirectoryChildren;
-
 export const fileService = {
-  // Retrieves all users from the database
   retrieveAndMapResults: async (): Promise<
     ServiceResponse<IDirectory | null>
   > => {
