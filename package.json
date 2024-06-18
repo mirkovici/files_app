@@ -1,0 +1,28 @@
+{
+  "name": "files_app",
+  "version": "1.0.0",
+  "description": "Application for mapping data from: https://rest-test-eight.vercel.app/api/test",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx tsx watch --clear-screen=false src/index.ts --onSuccess \"node dist/index.js\"",
+    "build": "rimraf dist && tsup"
+  },
+  "author": "Igor Mirkovic",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "http-status-codes": "^2.3.0",
+    "node-fetch": "^3.3.2",
+    "pino": "^9.2.0",
+    "pino-http": "^10.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
