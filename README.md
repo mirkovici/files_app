@@ -1,4 +1,4 @@
-This application is made for fetching files data, mapping it and returning it from endpoint that is /api/files/
+This application is made for fetching files data, mapping it and returning it from endpoint: /api/files/
 
 To successfully run application you will need to:
 
