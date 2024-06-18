@@ -1,12 +1,17 @@
 import { StatusCodes } from "http-status-codes";
 import fetch from "node-fetch";
-import { IData, IPath, IDirectory, IDirectoryChildren } from "@/common/types";
+import {
+  IData,
+  IPath,
+  IDirectory,
+  IDirectoryChildren,
+  IDirectoryNode,
+} from "@/common/types";
 import {
   ResponseStatus,
   ServiceResponse,
 } from "@/common/models/serviceResponse";
 import { logger } from "@/server";
-import { P } from "pino";
 
 export const fileService = {
   retrieveAndMapResults: async (): Promise<
@@ -66,22 +71,27 @@ export const fileService = {
           index === pathSegments.length - 1 &&
           segment.indexOf(".") != -1;
 
-        if (!currentDirectory?.some((item: any) => item.name === segment)) {
+        if (
+          !currentDirectory?.some(
+            (item: IDirectoryChildren) => item.name === segment
+          )
+        ) {
           const newPath = isFile ? segment : { name: segment, children: [] };
-          currentDirectory?.push(newPath as any);
+          currentDirectory?.push(newPath as IDirectoryChildren);
         }
 
         currentDirectory = isFile
           ? currentDirectory
-          : currentDirectory?.find((item: any) => item.name === segment)
-              ?.children;
+          : currentDirectory?.find(
+              (item: IDirectoryChildren) => item.name === segment
+            )?.children;
       });
     });
 
-    const transformTreeStructure = (tree: any) => {
-      return tree.map((node: any) => {
+    const transformTreeStructure = (tree: IDirectoryChildren[]) => {
+      return tree.map((node: IDirectoryChildren) => {
         if (node.children) {
-          const newNode: any = {
+          const newNode: IDirectoryNode = {
             [node.name]: transformTreeStructure(node.children),
           };
           return newNode;
@@ -92,7 +102,7 @@ export const fileService = {
 
     const treeStructure = transformTreeStructure(directoryTree);
 
-    mappedResult[ipAddress] = treeStructure;
+    mappedResult[ipAddress] = treeStructure as [];
     return mappedResult;
   },
 };

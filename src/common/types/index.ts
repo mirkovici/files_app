@@ -18,3 +18,7 @@ export interface IDirectoryChildren {
   name: string;
   children: [];
 }
+
+export interface IDirectoryNode {
+  [x: string]: (IDirectoryChildren | IDirectoryNode)[];
+}
