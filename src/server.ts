@@ -9,7 +9,8 @@ const logger = pino({ name: "server start" });
 const app: Express = express();
 
 // Middlewares
-// App can only be used from CORS ORIGIN
+
+// App can only be used from CORS ORIGIN (abstact client)
 app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 
 // Request logging
